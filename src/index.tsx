@@ -1,12 +1,19 @@
 import * as React from "react";
 import * as ReactDom from "react-dom";
+import * as $ from 'jquery';
 
-import {GridImage} from "./components/GridImage";
+import {Grid} from "./components/Grid";
+
+import {FumbblSocket} from "./FumbblSocket";
 
 require('./css/grid.scss');
 
+
 ReactDom.render(
-    <GridImage imageSrc="resources/pitch/nice.jpg" elementId="pitchImage2" />, document.getElementById("entrypoint")
+   <Grid />, document.getElementById("entrypoint")
 )
 
+$(document).ready( function() {
+    let socket: FumbblSocket = new FumbblSocket("1005014");
+})
 

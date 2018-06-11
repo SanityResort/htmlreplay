@@ -1,3 +1,19 @@
 body {
     background-color: grey;
 }
+
+.grid {
+    position: relative;
+}
+
+.gridImage {
+    position: absolute;
+}
+
+.gridTile {
+    position: absolute;
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    background-color: black;
+}

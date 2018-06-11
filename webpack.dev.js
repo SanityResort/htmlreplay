@@ -7,9 +7,12 @@ const buildPath = path.join(__dirname, "dist");
 module.exports = merge( baseConfig, {
     mode: "development",
     devtool: "source-map",
-    devServer: {
+    devServer: { 
         contentBase: buildPath,
-        port: 3000
+        port: 3000,
+        watchOptions: {
+            aggregateTimeout: 1000
+        }
     },
 
     module: {
