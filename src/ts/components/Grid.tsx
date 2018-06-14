@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import {GridImage} from "./GridImage";
-import { GridTile } from "./GridTile";
 
 export class Grid extends React.Component {
     render(){

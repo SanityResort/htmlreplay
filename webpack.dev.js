@@ -11,7 +11,7 @@ module.exports = merge( baseConfig, {
         contentBase: buildPath,
         port: 3000,
         watchOptions: {
-            aggregateTimeout: 1000
+            aggregateTimeout: 10000
         }
     },
 
