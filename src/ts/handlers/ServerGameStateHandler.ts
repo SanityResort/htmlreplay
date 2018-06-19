@@ -3,25 +3,44 @@ import ServerCommand from '../model/commands/ServerCommand';
 import BoardState from '../BoardState';
 import Team from '../model/Team';
 import Player from '../model/Player';
+import PlayerState from '../model/PlayerState';
 
 export default class ServerGameStateHandler extends ServerCommandHandler {
     handle(prevState: BoardState, command: ServerCommand): [BoardState, Boolean] {
         if (command.netCommandId=="serverGameState") {
-            prevState.home = this.mapTeam((<any>command).game.teamHome);
-            prevState.away = this.mapTeam((<any>command).game.teamAway);
-            return [prevState, true];
+            let game: any = (<any>command).game;
+            prevState.home = this.mapData(game.turnDataHome, this.mapTeam(game.teamHome));
+            prevState.away = this.mapData(game.turnDataAway, this.mapTeam(game.teamAway));
+            return [this.mapAdditionalFields(prevState, game), true];
         }
         return [prevState, false];
     }
 
+    private mapAdditionalFields(prevState: BoardState, game: any): BoardState {
+        let coordinates = (<any[]>game.fieldModel.playerDataArray);
+        [prevState.home, prevState.away].forEach(team => {
+            team.players.forEach(player => {
+                let serverCoordinate = coordinates.find(coordinate => coordinate.playerId == player.playerId);
+                if (serverCoordinate) {
+                    player.coordinate = serverCoordinate.playerCoordinate;
+                    player.playerState = serverCoordinate.playerState;
+                }
+                
+            })
+        });
+        return {...prevState, ...{actingPlayer: game.actingPlayer, fieldModel: game.fieldModel}};
+    }
+
+    private mapData(turnData: any, team: Team): Team {
+        return {...team, ...turnData};
+    }
+
     private mapTeam(serverTeam: any): Team {
         let team: Team = new Team()
-        team.apothecaries = serverTeam.apothecaries;
         team.baseIconPath = serverTeam.baseIconPath;
         team.coach = serverTeam.coach;
         team.logoUrl = serverTeam.logoUrl;
         team.race = serverTeam.race;
-        team.reRolls = serverTeam.reRolls;
         team.teamName = serverTeam.teamName;
 
         let playerArray:any[] =  (<any[]>serverTeam.playerArray);
