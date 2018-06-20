@@ -18,8 +18,8 @@ export default class ServerCommandProcessor {
         console.log("Processign command: " + command.netCommandId)
         let handled: Boolean = false;
         this.handlers.forEach(handler => {
-            let [newState, wasHandled] = handler.handle( {...this.lastState}, command);
-            if (wasHandled) {
+            if (handler.handles(command)) {
+                let newState = handler.handle( {...this.lastState}, command);
                 handled = true;
                 if (!deepEqual(this.lastState, newState)) {
                     this.board.addState(newState);

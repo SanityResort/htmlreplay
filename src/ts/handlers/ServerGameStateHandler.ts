@@ -3,17 +3,17 @@ import ServerCommand from '../model/commands/ServerCommand';
 import BoardState from '../BoardState';
 import Team from '../model/Team';
 import Player from '../model/Player';
-import PlayerState from '../model/PlayerState';
 
 export default class ServerGameStateHandler extends ServerCommandHandler {
-    handle(prevState: BoardState, command: ServerCommand): [BoardState, Boolean] {
-        if (command.netCommandId=="serverGameState") {
-            let game: any = (<any>command).game;
-            prevState.home = this.mapData(game.turnDataHome, this.mapTeam(game.teamHome));
-            prevState.away = this.mapData(game.turnDataAway, this.mapTeam(game.teamAway));
-            return [this.mapAdditionalFields(prevState, game), true];
-        }
-        return [prevState, false];
+
+    supportedCommand = "serverGameState";
+
+    handle(prevState: BoardState, command: ServerCommand): BoardState {
+        let game: any = (<any>command).game;
+        prevState.home = this.mapData(game.turnDataHome, this.mapTeam(game.teamHome));
+        prevState.away = this.mapData(game.turnDataAway, this.mapTeam(game.teamAway));
+        return this.mapAdditionalFields(prevState, game);
+
     }
 
     private mapAdditionalFields(prevState: BoardState, game: any): BoardState {
