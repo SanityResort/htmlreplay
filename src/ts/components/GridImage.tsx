@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export class GridImage extends React.Component<{imageSrc: string, elementId: string}> {
+export default class GridImage extends React.Component<{imageSrc: string, elementId: string}> {
 
     render() {
         return (

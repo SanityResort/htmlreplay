@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import {GridImage} from "./GridImage";
+import GridImage from "./GridImage";
 
-export class Grid extends React.Component {
+export default class Grid extends React.Component {
     render(){
         let width=782;
         const tiles:any[] = [];

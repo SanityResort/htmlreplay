@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export class GridTile extends React.Component<{positionAbbrev:string, tileSize: number, 
+export default class GridTile extends React.Component<{positionAbbrev:string, tileSize: number, 
     rowIndex: number, colIndex: number}> {
 
 

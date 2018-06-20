@@ -1,4 +1,4 @@
-import { Board } from '../components/Board';
+import Board from '../components/Board';
 import BoardState from '../BoardState';
 import ServerCommand from '../model/commands/ServerCommand';
 import ServerCommandHandler from './ServerCommandHandler';
@@ -29,7 +29,7 @@ export default class ServerCommandProcessor {
             }
         });
         if (!handled) {
-            console.log("Unhandled command: "+command.netCommandId);
+            console.log("Unhandled command: "+JSON.stringify(command));
         }
     }
 }

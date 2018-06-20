@@ -1,10 +1,7 @@
 import * as lzs from "lz-string";
 import ServerCommandProcessor from "./handlers/ServerCommandProcessor";
-import ServerCommand from './model/commands/ServerCommand';
-import ServerModelSync from './model/commands/ServerModelSync';
 
-
-export class FumbblSocket {
+export default class FumbblSocket {
     static WS_URL="ws://78-66-217-160-no2200.tbcn.telia.com:22223/command"
 
     constructor(replayId: string, commandProcessor: ServerCommandProcessor){

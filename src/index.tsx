@@ -2,9 +2,9 @@ import * as React from "react";
 import * as ReactDom from "react-dom";
 import * as $ from 'jquery';
 
-import {Grid} from "./ts/components/Grid";
-import {Board} from "./ts/components/Board";
-import {FumbblSocket} from "./ts/FumbblSocket";
+import Grid from "./ts/components/Grid";
+import Board from "./ts/components/Board";
+import FumbblSocket from "./ts/FumbblSocket";
 import ServerCommandProcessor from "./ts/handlers/ServerCommandProcessor";
 
 require('./css/grid.scss');
