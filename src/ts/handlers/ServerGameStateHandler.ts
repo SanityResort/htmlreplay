@@ -3,17 +3,17 @@ import ServerCommand from '../model/commands/ServerCommand';
 import BoardState from '../BoardState';
 import Team from '../model/Team';
 import Player from '../model/Player';
+import ServerGameState from '../model/commands/ServerGameState';
 
 export default class ServerGameStateHandler extends ServerCommandHandler {
 
     supportedCommand = "serverGameState";
 
     handle(prevState: BoardState, command: ServerCommand): BoardState {
-        let game: any = (<any>command).game;
+        let game: any = (<ServerGameState>command).game;
         prevState.home = this.mapData(game.turnDataHome, this.mapTeam(game.teamHome));
         prevState.away = this.mapData(game.turnDataAway, this.mapTeam(game.teamAway));
         return this.mapAdditionalFields(prevState, game);
-
     }
 
     private mapAdditionalFields(prevState: BoardState, game: any): BoardState {

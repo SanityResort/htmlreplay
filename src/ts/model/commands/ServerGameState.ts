@@ -1,8 +1,4 @@
-import Team from '../Team';
-
-export default class ServerGameState {
-    game: {
-        teamAway: any,
-        teamHome: any
-    }
+import ServerCommand from './ServerCommand';
+export default class ServerGameState extends ServerCommand{
+    game: any
 }
