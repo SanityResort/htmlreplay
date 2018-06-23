@@ -10,7 +10,7 @@ export default class Team {
     apothecaries: number;
     baseIconPath: URL;
     logoUrl: URL;
-    players: Map<string, Player>;
+    players: Player[];
     turnNr: number
     blitzUsed: boolean
     foulUsed: boolean

@@ -20,11 +20,11 @@ export default class GameState {
 
     copyLatestState(): BoardState {
         let length: number = this.history.length
-        let newState: BoardState = new BoardState();
         if (this.history.length > 0) {
-            newState = $.extend(true, newState, this.history[length - 1 ])
+            return JSON.parse(JSON.stringify(this.history[length-1]))
+        } else {
+            return new BoardState();
         }
-        return newState;
     }
 
 }

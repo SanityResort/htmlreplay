@@ -4,7 +4,7 @@ import BoardState from '../../components/board/BoardState';
 import Team from '../../model/Team';
 import Player from '../../model/Player';
 import ServerGameState from '../../model/commands/ServerGameState';
-import PlayerMapper from '../../mapper/PlayerMapper';
+import PlayerMapper from '../../util/PlayerMapper';
 
 export default class GameStateHandler extends ServerCommandHandler {
 
@@ -52,11 +52,7 @@ export default class GameStateHandler extends ServerCommandHandler {
 
         let playerArray:any[] =  (<any[]>serverTeam.playerArray);
 
-        team.players = new Map<string,Player>(playerArray.map(serverPlayer => {
-            let player: Player = PlayerMapper.map(serverPlayer, team.positionArray);
-            return <[string, Player]>[player.playerId, player];
-
-        }));        
+        team.players = playerArray.map(serverPlayer => PlayerMapper.map(serverPlayer, team.positionArray));        
         return team;
     }
 }
