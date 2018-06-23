@@ -1,4 +1,5 @@
 import BoardState from './BoardState';
+import * as $ from 'jquery';
 
 export default class GameState {
     history: BoardState[] = []
@@ -14,11 +15,16 @@ export default class GameState {
         if (this.realTime) {
             this.historyIndex = this.history.length - 1
         }
+        console.log("Added state, length is now: " + this.history.length)
     }
 
     copyLatestState(): BoardState {
         let length: number = this.history.length
-        return this.history.length ? {...this.history[length - 1 ]} : new BoardState();
+        let newState: BoardState = new BoardState();
+        if (this.history.length > 0) {
+            newState = $.extend(true, newState, this.history[length - 1 ])
+        }
+        return newState;
     }
 
 }

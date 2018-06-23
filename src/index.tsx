@@ -18,7 +18,7 @@ ReactDom.render(
 )
 
 $(document).ready( function() {
-    let processor: ServerCommandProcessor = new ServerCommandProcessor(new Board({}));
+    let processor: ServerCommandProcessor = new ServerCommandProcessor();
     let socket: FumbblSocket = new FumbblSocket("1005014", (data: any) => {processor.handle(data)})
     ServerCommandHandlerMap.init(new GameState(false))
     ModelChangeHandlerMap.init(socket);

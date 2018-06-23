@@ -1,6 +1,9 @@
 import ModelChangeHandler from './ModelChangeHandler';
 import GameFinishedHandler from './GameFinishedHandler';
+import AddInducementHandler from './AddInducementHandler';
 import FumbblSocket from '../../FumbblSocket';
+import SetWeatherHandler from './SetWeatherHandler';
+import AddPlayerHandler from '../serverCommand/AddPlayerHandler';
 
 export default class ModelChangeHandlerMap {
     private static MAP: Map<string, ModelChangeHandler> = new Map<string, ModelChangeHandler>()
@@ -15,5 +18,7 @@ export default class ModelChangeHandlerMap {
 
     static init(socket: FumbblSocket) {
        this.put(new GameFinishedHandler(socket))
+       this.put(new AddInducementHandler())
+       this.put(new SetWeatherHandler())
     }
 }

@@ -1,7 +1,9 @@
 import Player from './Player';
+import Inducement from './Inducement';
 
 export default class Team {
     teamName: string;
+    teamId: string;
     coach: string;
     race: string;
     reRolls: number;
@@ -9,14 +11,19 @@ export default class Team {
     baseIconPath: URL;
     logoUrl: URL;
     players: Map<string, Player>;
-
-    turnNr: 8
-    blitzUsed: false
-    foulUsed: false
-    reRollUsed: false
-    handOverUsed: false
-    passUsed: false
-    coachBanned: false
-    leaderState: "none"
-    //inducementSet": {"inducementArray": [{"inducementType": "mercenaries","value": 1,"uses": 0},{"inducementType": "starPlayers","value": 1,"uses": 0}],"cardsAvailable": [],"cardsActive": [],"cardsDeactivated": []}}
+    turnNr: number
+    blitzUsed: boolean
+    foulUsed: boolean
+    reRollUsed: boolean
+    handOverUsed: boolean
+    passUsed: boolean
+    coachBanned: boolean
+    leaderState: string
+    inducementSet: {
+        inducementArray: Inducement[],
+        cardsAvailable: string[],
+        cardsActive: string[],
+        cardsDeactivated: string[]
+    }
+    positionArray:any[]
 }

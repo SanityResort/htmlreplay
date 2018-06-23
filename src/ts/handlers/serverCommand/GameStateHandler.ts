@@ -4,8 +4,9 @@ import BoardState from '../../components/board/BoardState';
 import Team from '../../model/Team';
 import Player from '../../model/Player';
 import ServerGameState from '../../model/commands/ServerGameState';
+import PlayerMapper from '../../mapper/PlayerMapper';
 
-export default class ServerGameStateHandler extends ServerCommandHandler {
+export default class GameStateHandler extends ServerCommandHandler {
 
     supportedCommand = "serverGameState";
 
@@ -30,7 +31,9 @@ export default class ServerGameStateHandler extends ServerCommandHandler {
                 
             })
         });
-        return {...newState, ...{actingPlayer: game.actingPlayer, fieldModel: game.fieldModel}};
+        newState.actingPlayer = game.actingPlayer;
+        newState.fieldModel = game.fieldModel;
+        return newState;
     }
 
     private mapData(turnData: any, team: Team): Team {
@@ -44,42 +47,13 @@ export default class ServerGameStateHandler extends ServerCommandHandler {
         team.logoUrl = serverTeam.logoUrl;
         team.race = serverTeam.race;
         team.teamName = serverTeam.teamName;
+        team.teamId = serverTeam.teamId;
+        team.positionArray = serverTeam.roster.positionArray
 
         let playerArray:any[] =  (<any[]>serverTeam.playerArray);
-        let positionArray:any[] = serverTeam.roster.positionArray
 
         team.players = new Map<string,Player>(playerArray.map(serverPlayer => {
-            let player: Player = new Player();
-            player.additionalSkills=serverPlayer.skillArray
-            player.agility=serverPlayer.agility;
-            player.playerId=serverPlayer.playerId;
-            player.playerNr=serverPlayer.playerNr;
-            player.playerName=serverPlayer.playerName;
-            player.playerGender=serverPlayer.playerGender;
-            player.playerType=serverPlayer.playerType;
-            player.movement=serverPlayer.movement;
-            player.strength=serverPlayer.strength;
-            player.armour=serverPlayer.armour;
-            player.lastingInjuries=serverPlayer.lastingInjuries;
-            player.recoveringInjury=serverPlayer.recoveringInjury;
-            player.urlPortrait=serverPlayer.urlPortrait;
-            player.urlIconSet=serverPlayer.urlIconSet;
-            player.nrOfIcons=serverPlayer.nrOfIcons;
-            player.positionIconIndex=serverPlayer.positionIconIndex;
-            
-            let position: any = positionArray.find(pos => pos.positionId === serverPlayer.positionId);
-
-            if (position) {
-                player.baseSkills=position.skillArray;
-                player.position=serverPlayer.positionName;
-                player.shorthand=serverPlayer.shorthand;
-            } else {
-                player.baseSkills=[];
-                player.position="";
-                player.shorthand="";
-            }
-
-
+            let player: Player = PlayerMapper.map(serverPlayer, team.positionArray);
             return <[string, Player]>[player.playerId, player];
 
         }));        

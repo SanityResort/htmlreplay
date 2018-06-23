@@ -3,7 +3,7 @@ import ServerCommand from "../../model/commands/ServerCommand";
 import ServerReplay from '../../model/commands/ServerReplay';
 import ServerCommandHandlerMap from './ServerCommandHandlerMap';
 
-export default class ServerReplayHandler extends ServerCommandHandler {
+export default class ReplayHandler extends ServerCommandHandler {
     supportedCommand = "serverReplay";
 
     handle(command: ServerCommand): void {

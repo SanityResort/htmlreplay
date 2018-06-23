@@ -25,4 +25,6 @@ export default class Player {
     coordinate: Coordinate;
     playerState: PlayerState;
     shorthand: string;
+    cards: string[];
+    cardEffects: string[];
 }

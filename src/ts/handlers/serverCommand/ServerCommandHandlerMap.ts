@@ -1,8 +1,9 @@
 import ServerCommandHandler from './ServerCommandHandler';
-import ServerGameStateHandler from './ServerGameStateHandler';
+import GameStateHandler from './GameStateHandler';
 import GameState from '../../components/board/GameState';
-import ServerReplayHandler from './ServerReplayHandler';
-import ServerModelSyncHandler from './ServerModelSyncHandler';
+import ReplayHandler from './ReplayHandler';
+import ModelSyncHandler from './ModelSyncHandler';
+import AddPlayerHandler from './AddPlayerHandler';
 
 export default class ServerCommandHandlerMap {
     private static MAP: Map<string, ServerCommandHandler> = new Map<string, ServerCommandHandler>()
@@ -16,8 +17,9 @@ export default class ServerCommandHandlerMap {
     }
 
     static init(gameState: GameState) {
-        this.put(new ServerGameStateHandler(gameState))
-        this.put(new ServerReplayHandler(gameState))
-        this.put(new ServerModelSyncHandler(gameState))
-    }
+        this.put(new GameStateHandler(gameState))
+        this.put(new ReplayHandler(gameState))
+        this.put(new ModelSyncHandler(gameState))
+        this.put(new AddPlayerHandler(gameState))
+   }
 }
