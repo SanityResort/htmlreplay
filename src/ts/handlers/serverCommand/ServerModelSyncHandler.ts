@@ -19,7 +19,7 @@ export default class ServerModelSyncHandler extends ServerCommandHandler {
                 if (handler) {
                     handler.handle(modelChange);
                 } else {
-                    console.log("Unhandled modelChange: " + JSON.stringify(command));
+                    console.log("Unhandled modelChange: " + JSON.stringify(modelChange));
                 }
             })
 
