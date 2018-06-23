@@ -5,7 +5,7 @@ import ServerCommandHandlerMap from './handlers/serverCommand/ServerCommandHandl
 
 export default class ServerCommandProcessor {
 
-    private ignoredCommands: string[] = ["serverGanmeTime"]
+    private ignoredCommands: string[] = ["serverGameTime"]
 
     public handle(command: ServerCommand): void {
         if (this.ignoredCommands.indexOf(command.netCommandId) === -1) {

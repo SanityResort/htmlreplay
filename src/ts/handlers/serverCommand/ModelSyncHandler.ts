@@ -10,7 +10,7 @@ export default class ModelSyncHandler extends ServerCommandHandler {
     supportedCommand = "serverModelSync";
 
     private ignoredChanges: string[] = ["gameSetStarted","teamResultSetTeamValue","teamResultSetPettyCashTransferred","gameSetDialogParameter",
-    "fieldModelAddPlayerMarker"]
+    "fieldModelAddPlayerMarker", "fieldModelRemovePlayer"]
 
     handle(command: ServerCommand){
         let modelSync = <ServerModelSync>command;
@@ -28,7 +28,7 @@ export default class ModelSyncHandler extends ServerCommandHandler {
                 }
             })
 
-            if (!deepEqual(newState, this.gameState.copyLatestState)) {
+            if (!deepEqual(newState, this.gameState.copyLatestState())) {
                 this.gameState.addState(newState);
             } else {
                 console.log("State was unchanged for modelSync " + modelSync.commandNr)
