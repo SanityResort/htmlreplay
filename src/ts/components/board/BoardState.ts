@@ -1,4 +1,4 @@
-import Team from './model/Team';
+import Team from '../../model/Team';
 
 export default class BoardState {
     home: Team;

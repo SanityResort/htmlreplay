@@ -1,8 +1,8 @@
-import ServerCommand from '../ServerCommand';
+import ServerCommand from './ServerCommand';
 import ModelChange from './ModelChange';
 import Report from '../report/Report';
 
-export default class ModelSync extends ServerCommand {
+export default class ServerModelSync extends ServerCommand {
     commandNr: number
     sound: string
     gameTime: number

@@ -1,5 +1,5 @@
 import ServerCommand from './ServerCommand';
-import ServerModelSync from './model/ModelSync';
+import ServerModelSync from './ServerModelSync';
 export default class ServerReplay extends ServerCommand {
     commandArray: ServerModelSync[]
     totalNrOfCommands: number

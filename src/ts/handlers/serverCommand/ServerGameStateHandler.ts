@@ -1,24 +1,26 @@
 import ServerCommandHandler from './ServerCommandHandler';
-import ServerCommand from '../model/commands/ServerCommand';
-import BoardState from '../BoardState';
-import Team from '../model/Team';
-import Player from '../model/Player';
-import ServerGameState from '../model/commands/ServerGameState';
+import ServerCommand from '../../model/commands/ServerCommand';
+import BoardState from '../../components/board/BoardState';
+import Team from '../../model/Team';
+import Player from '../../model/Player';
+import ServerGameState from '../../model/commands/ServerGameState';
 
 export default class ServerGameStateHandler extends ServerCommandHandler {
 
     supportedCommand = "serverGameState";
 
-    handle(prevState: BoardState, command: ServerCommand): BoardState {
+    handle(command: ServerCommand): void {
         let game: any = (<ServerGameState>command).game;
-        prevState.home = this.mapData(game.turnDataHome, this.mapTeam(game.teamHome));
-        prevState.away = this.mapData(game.turnDataAway, this.mapTeam(game.teamAway));
-        return this.mapAdditionalFields(prevState, game);
+        let newState: BoardState = this.gameState.copyLatestState()
+        newState.home = this.mapData(game.turnDataHome, this.mapTeam(game.teamHome));
+        newState.away = this.mapData(game.turnDataAway, this.mapTeam(game.teamAway));
+        newState = this.mapAdditionalFields(newState, game);
+        this.gameState.addState(newState);
     }
 
-    private mapAdditionalFields(prevState: BoardState, game: any): BoardState {
+    private mapAdditionalFields(newState: BoardState, game: any): BoardState {
         let coordinates = (<any[]>game.fieldModel.playerDataArray);
-        [prevState.home, prevState.away].forEach(team => {
+        [newState.home, newState.away].forEach(team => {
             team.players.forEach(player => {
                 let serverCoordinate = coordinates.find(coordinate => coordinate.playerId == player.playerId);
                 if (serverCoordinate) {
@@ -28,7 +30,7 @@ export default class ServerGameStateHandler extends ServerCommandHandler {
                 
             })
         });
-        return {...prevState, ...{actingPlayer: game.actingPlayer, fieldModel: game.fieldModel}};
+        return {...newState, ...{actingPlayer: game.actingPlayer, fieldModel: game.fieldModel}};
     }
 
     private mapData(turnData: any, team: Team): Team {
