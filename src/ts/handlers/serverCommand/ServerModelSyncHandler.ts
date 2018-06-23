@@ -17,7 +17,7 @@ export default class ServerModelSyncHandler extends ServerCommandHandler {
             modelSync.modelChangeList.modelChangeArray.forEach(modelChange => {
                 let handler: ModelChangeHandler|undefined = ModelChangeHandlerMap.get(modelChange.modelChangeId);
                 if (handler) {
-                    newState = {...newState, ...handler.handle(modelChange)};
+                    handler.handle(modelChange);
                 } else {
                     console.log("Unhandled modelChange: " + JSON.stringify(command));
                 }

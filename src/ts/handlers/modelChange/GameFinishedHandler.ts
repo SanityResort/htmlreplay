@@ -11,8 +11,7 @@ export default class GameFinishedHandler extends ModelChangeHandler {
         this.socket = socket;
     }
 
-    handle(modelChange: ModelChange): any {
+    handle(modelChange: ModelChange): void {
         this.socket.close();
-        return {};
     }
 }
