@@ -21,6 +21,7 @@ export default class FumbblSocket {
     }
 
     close() {
+        console.log("Closing websocket.")
         this.websocket.close();
     }
 }
