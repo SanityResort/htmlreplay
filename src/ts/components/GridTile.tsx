@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export default class GridTile extends React.Component<{positionAbbrev:string, tileSize: number, 
-    rowIndex: number, colIndex: number}> {
+    rowIndex: number, colIndex: number, key: string}> {
 
 
     render(){

@@ -11,7 +11,7 @@ export default class SetPlayerCoordinateHandler extends ModelChangeHandler {
     handle(modelChange: ModelChange, boardState: BoardState): void {
         let player: Player|undefined = BoardStateUtil.playerById(boardState, modelChange.modelChangeKey)
         if (player) {
-            player.coordinate = modelChange.modelChangeValue
+            player.coordinate = {x: modelChange.modelChangeValue[0], y:modelChange.modelChangeValue[1]}
         }
     }
 }

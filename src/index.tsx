@@ -2,7 +2,6 @@ import * as React from "react";
 import * as ReactDom from "react-dom";
 import * as $ from 'jquery';
 
-import Grid from "./ts/components/Grid";
 import Board from "./ts/components/board/Board";
 import ServerCommandProcessor from './ts/ServerCommandProcessor';
 import ServerCommandHandlerMap from './ts/handlers/serverCommand/ServerCommandHandlerMap';
@@ -12,15 +11,16 @@ import FumbblSocket from './ts/FumbblSocket';
 
 require('./css/grid.scss');
 
+let gameState: GameState = new GameState(false);
 
 ReactDom.render(
-   <Grid />, document.getElementById("entrypoint")
-)
-
+    <Board gameState={gameState} />, document.getElementById("entrypoint")
+ )
+ 
 $(document).ready( function() {
     let processor: ServerCommandProcessor = new ServerCommandProcessor();
     let socket: FumbblSocket = new FumbblSocket("1005014", (data: any) => {processor.handle(data)})
-    ServerCommandHandlerMap.init(new GameState(false))
+    ServerCommandHandlerMap.init(gameState)
     ModelChangeHandlerMap.init(socket);
     console.log("Initialization done");
 })

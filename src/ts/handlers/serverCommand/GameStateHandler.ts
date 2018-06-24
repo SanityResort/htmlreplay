@@ -25,7 +25,7 @@ export default class GameStateHandler extends ServerCommandHandler {
             team.players.forEach(player => {
                 let serverCoordinate = coordinates.find(coordinate => coordinate.playerId == player.playerId);
                 if (serverCoordinate) {
-                    player.coordinate = serverCoordinate.playerCoordinate;
+                    player.coordinate = {x: serverCoordinate.playerCoordinate, y: serverCoordinate.playerCoordinate[1]};
                     player.playerState = serverCoordinate.playerState;
                 }
                 

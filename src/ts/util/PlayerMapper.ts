@@ -7,8 +7,8 @@ export default class PlayerMapper {
 
         if (position) {
             player.baseSkills=position.skillArray ? position.skillArray : [];
-            player.position=serverPlayer.positionName;
-            player.shorthand=serverPlayer.shorthand;
+            player.position=position.positionName;
+            player.shorthand=position.shorthand;
         } else {
             player.baseSkills=[];
             player.position="";

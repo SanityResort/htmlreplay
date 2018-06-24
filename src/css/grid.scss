@@ -2,12 +2,21 @@ body {
     background-color: grey;
 }
 
+.gridParent {
+    position: relative
+}
+
 .grid {
-    position: relative;
+    position: absolute;
 }
 
 .gridImage {
     position: absolute;
+}
+
+.gridButton {
+    position: absolute;
+    top: 500px;
 }
 
 .gridTile {
